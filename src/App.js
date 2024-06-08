@@ -1,0 +1,65 @@
+import Footer from "./Footer";
+import Header from "./Header";
+import "./styles.css";
+import gofImage from "./images/wallpaperflare.com_wallpaper_4.jpg";
+import { useState } from "react";
+import axios from "axios";
+import { API_URL } from './globals';
+
+const App = () => {
+  const [books, setBooks] = useState(null)
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get(API_URL)
+      console.log(response.data);
+      setBooks(response.data);
+    } catch (error) {
+      console.error('Error fetching data: ', error);
+    }
+  }
+
+  return (
+    <div className="App">
+      <Header />
+      <div className="game-universe-content">
+        <p>
+          Welcome to the vast and complex world of Game of Thrones, created by
+          George R.R. Martin. In this fictional universe, you'll encounter
+          kingdoms, intrigue, and epic battles for the Iron Throne.
+        </p>
+        <p>
+          On the continent of Westeros, noble houses like Stark, Lannister,
+          Targaryen, and Baratheon vie for power, while the Night's Watch guards
+          the Wall in the North against threats from beyond.
+        </p>
+        <p>
+          Meanwhile, across the Narrow Sea in the continent of Essos, cities like
+          King's Landing, Winterfell, and Braavos are bustling with political
+          intrigue, and the Dothraki roam the vast grasslands.
+        </p>
+        <p>
+          Magic, dragons, White Walkers, and direwolves are just some of the
+          fantastical elements that await you in this epic tale of power and
+          betrayal.
+        </p>
+        <p>
+          So, whether you're a fan of the books or the TV series, or you're new to
+          the world of Game of Thrones, prepare for an unforgettable journey
+          through this rich and captivating universe.
+        </p>
+        <div className="centered-image-container">
+          <img
+            src={gofImage}
+            alt="Game of Thrones"
+            className="game-image"
+          />
+        </div>
+      </div>
+      <button className="fetch-button" onClick={fetchData}>Fetch Data</button>
+      <Footer />
+    </div>
+  )
+}
+
+export default App
