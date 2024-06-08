@@ -57,6 +57,32 @@ const App = () => {
         </div>
       </div>
       <button className="fetch-button" onClick={fetchData}>Fetch Data</button>
+
+      <div className="books">
+        {books &&
+          books.map((book, index) => {
+            const cleanedDate = new Date(book.released).toDateString()
+            console.log(cleanedDate)
+            const authors = book.authors.join(', ')
+            console.log(authors)
+
+            return (
+              <div className="book" key={index}>
+                <h3>Book {index + 1}</h3>
+                <h2>{book.name}</h2>
+
+                <div className="details">
+                  <p>{authors}</p>
+                  <p>{book.numberOfPages}</p>
+                  <p>{book.country}</p>
+                  <p>{cleanedDate}</p>
+                </div>
+              </div>
+            )
+          })
+        }
+      </div>
+
       <Footer />
     </div>
   )
